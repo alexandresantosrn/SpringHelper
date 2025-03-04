@@ -27,10 +27,10 @@ public class OpenfeignExampleApplication implements CommandLineRunner {
 		System.out.println("-- Feign --");
 		System.out.println("\n");
 		System.out.println(" Mostrando Json com ToString:");
-		System.out.println(ibgeClient.obterEstados());
+		System.out.println(ibgeClient.getEstados());
 
-		List<Estado> estados = ibgeClient.obterEstados();
-		List<Municipio> municipiosRN = ibgeClient.obterMunicipiosRN();
+		List<Estado> estados = ibgeClient.getEstados();
+		List<Municipio> municipiosRN = ibgeClient.getMunicipiosRN();
 
 		System.out.println("\n");
 		System.out.println(" Json formatado:");
@@ -45,6 +45,14 @@ public class OpenfeignExampleApplication implements CommandLineRunner {
 		}
 
 		System.out.println("\n");
+		System.out.println(" Exibindo dados do Rio Grande do Norte:");
+		Estado estado = ibgeClient.getEstadoById(24L);
+		System.out.print(estado.getId());
+		System.out.print(" - ");
+		System.out.println(estado.getNome());
+
+		System.out.println("\n");
+		System.out.println(" Municípios do Rio Grande do Norte:");
 
 		for (Municipio municipio : municipiosRN) {
 			System.out.print(municipio.getId());

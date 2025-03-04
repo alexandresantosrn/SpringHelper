@@ -46,5 +46,16 @@ public class ResttemplateExampleApplication implements CommandLineRunner {
             }
         }
 
+        System.out.println("\n");
+        System.out.println(" Exibindo dados do Rio Grande do Norte:");
+        url = "http://servicodados.ibge.gov.br/api/v1/localidades/estados/24";
+        Estado estado = restTemplate.getForObject(url, Estado.class);
+        if (estado != null) {
+            System.out.print(estado.getId());
+        }
+        System.out.print(" - ");
+        if (estado != null) {
+            System.out.println(estado.getNome());
+        }
     }
 }
