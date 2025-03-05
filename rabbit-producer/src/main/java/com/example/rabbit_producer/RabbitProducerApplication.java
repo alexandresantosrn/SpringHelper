@@ -6,17 +6,20 @@ import com.rabbitmq.client.ConnectionFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.io.IOException;
+import java.util.concurrent.TimeoutException;
+
 @SpringBootApplication
 public class RabbitProducerApplication {
 
 	private final static String QUEUE_NAME = "hello";
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) throws IOException, TimeoutException {
 		startProducer();
 		SpringApplication.run(RabbitProducerApplication.class, args);
 	}
 
-	private static void startProducer() throws Exception{
+	private static void startProducer() throws IOException, TimeoutException {
 
 		ConnectionFactory factory = new ConnectionFactory();
 
@@ -27,9 +30,11 @@ public class RabbitProducerApplication {
         try (Connection connection = factory.newConnection()) {
             Channel channel = connection.createChannel();
 			channel.queueDeclare(QUEUE_NAME, false, false, false, null);
-			String message = "Hello World";
-			channel.basicPublish("", QUEUE_NAME, null, message.getBytes());
-			System.out.println(" [x] Sent '"  + message + "'");
+			for (int i = 0; i < 3; i++) {
+				String message = String.format("Hello World[%d]", i);
+				channel.basicPublish("", QUEUE_NAME, null, message.getBytes());
+				System.out.println(" [x] Sent '" + message + "'");
+			}
         }
 
     }
