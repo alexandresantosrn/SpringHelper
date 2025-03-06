@@ -2,8 +2,8 @@
 Projeto inspirado no vídeo: https://www.youtube.com/watch?v=-OvKriPmEqU
 
 ## Passos
-- Gerar no Spring Initializr as dependências do Spring Web e OpenFeign;
-- Criar interface para comunicação com o endpoint;
+- Gerar no Spring Initializr as dependências com Spring Web e OpenFeign;
+- Criar interface para comunicação com o endpoint desejado;
 - Na classe principal implementar o CommandLinner e chamar os métodos da interface criada.
 
 ## Resultados
